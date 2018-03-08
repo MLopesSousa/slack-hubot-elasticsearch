@@ -1,0 +1,56 @@
+var body = JSON.parse('{
+  "query": {
+    "filtered": {
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "query_string": {
+                "query": "@fields.tipo:\"DATASOURCE\" AND @fields.instance:\"Server-MFE-PROD-WS05\" AND @fields.pool:\"MfeDS\""
+              }
+            }
+          ]
+        }
+      },
+      "filter": {
+        "bool": {
+          "must": [
+            {
+              "range": {
+                "@timestamp": {
+                  "from": 1520523136780,
+                  "to": 1520526736780
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "highlight": {
+    "fields": {},
+    "fragment_size": 2147483647,
+    "pre_tags": [
+      "@start-highlight@"
+    ],
+    "post_tags": [
+      "@end-highlight@"
+    ]
+  },
+  "size": 500,
+  "sort": [
+    {
+      "@timestamp": {
+        "order": "desc",
+        "ignore_unmapped": true
+      }
+    },
+    {
+      "@timestamp": {
+        "order": "desc",
+        "ignore_unmapped": true
+      }
+    }
+  ]
+}');
